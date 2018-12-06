@@ -9,6 +9,11 @@ config.$inject = [
 ]
 
 function config($stateProvider, $urlRouterProvider) {
+
+    /* 
+     Index Page
+     user can enter ip address and channel number
+    */
     var indexState = {
         name: 'index',
         url: '/index',
@@ -17,9 +22,21 @@ function config($stateProvider, $urlRouterProvider) {
         controllerAs: 'indexView'
     }
 
-    $stateProvider.state(indexState);
+    var carControlState = {
+        name: 'carControl',
+        url: '/control',
+        templateUrl: 'app/shared/carControl/carControlView.html',
+        controller: 'CarControlViewCtrl',
+        controllerAs: 'carControlView'
+    }
 
-    $urlRouterProvider.otherwise('/index');
+    $stateProvider.state(indexState);
+    $stateProvider.state(carControlState);
+
+    //$urlRouterProvider.otherwise('/index');
+
+    //FOR DEBUGGING DEFAULT CHANGED TO CAR CONTROL VIEW
+    $urlRouterProvider.otherwise('/control');
 }
 
 angular.module('app').run(run);

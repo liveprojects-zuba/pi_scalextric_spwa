@@ -1,10 +1,11 @@
 angular.module('app').controller('IndexViewCtrl', IndexViewCtrl);
 
 IndexViewCtrl.$inject = [
-    '$rootScope'
+    '$rootScope',
+    'dataService'
 ];
 
-function IndexViewCtrl($rootScope) {
+function IndexViewCtrl($rootScope,dataService) {
     var vm = this;
 
     vm.channels = Array.apply(null, { length: $rootScope.numberChannels }).map(Function.call, Number);;
@@ -14,9 +15,18 @@ function IndexViewCtrl($rootScope) {
 
     function go(valid) {
         if (!valid) {
-            console.log('invalid');
+            alert("Invalid Details")
         } else {
-            console.log('conents', vm.channel, ' ', vm.ip_address);
+            dataService.validateDetails(vm.ip_address,vm.channel).then(function(result){
+                if(result.status === 200){
+                    
+                }else{
+                    alert("Invalid Details")
+                }
+            }).catch(function(error){
+                console.log(error);
+                alert("Invalid Details")
+            })
         }
 
     }
