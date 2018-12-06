@@ -1,0 +1,24 @@
+{
+  "name": "pi_scalextric_spwa",
+  "version": "1.0.0",
+  "description": "Single Page Web Application (SPWA) to control the pi scalextric",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliceliveprojects/pi_scalextric_spwa.git"
+  },
+  "keywords": [
+    "SPWA",
+    "pi",
+    "scalextric"
+  ],
+  "author": "Yusof Bandar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliceliveprojects/pi_scalextric_spwa/issues"
+  },
+  "homepage": "https://github.com/aliceliveprojects/pi_scalextric_spwa#readme"
+}
