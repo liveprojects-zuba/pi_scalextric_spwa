@@ -1,3 +1,5 @@
-<h1>
-    
-</h1>
+<form>
+    IP Address <input type="text" ng-model="indexView.ip_address"> <br>
+    Channel <select ng-model="indexView.channel" ng-options="c for c in indexView.channels"></select> <br>
+    <input type="button" value="Go" ng-click="indexView.go()">
+</form>
