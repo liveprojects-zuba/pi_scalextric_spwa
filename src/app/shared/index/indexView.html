@@ -1,8 +1,8 @@
 <form name="setup_form" ng-submit="indexView.go(setup_form.$valid)">
-    IP Address <input name="ip_address" type="text" ng-model="indexView.ip_address" required address>
+    IP Address <input name="ip_address" type="text" ng-model="indexView.ip_address" required address></input>
     
     
     <br>
     Channel <select ng-model="indexView.channel" ng-options="c for c in indexView.channels" required></select> <br>
-    <input type="submit" value="Go" ng-disabled="steup_form.$invalid">
+    <input type="submit" value="Go" ng-disabled="steup_form.$invalid"></input>
 </form>
