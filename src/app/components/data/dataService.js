@@ -46,6 +46,17 @@ function dataService($rootScope, $http) {
         return $http.post(url, details);
     }
 
-   
+    /*
+        Gets throttle percentage
+        
+        Path :/macros/getPercentage/:channel
+        Method : Post
+    */
+    function getThrottle(channel) {
+        var url = $rootScope.url + '/macros/getPercentage/' + channel;
+
+        return $http.get(url);
+
+    }
 
 }
