@@ -3,7 +3,6 @@ angular.module('app').service('dataService', dataService);
 dataService.$inject = [
     '$rootScope',
     '$http'
-
 ];
 
 function dataService($rootScope, $http) {
@@ -20,14 +19,14 @@ function dataService($rootScope, $http) {
         Method : Post
     */
     function validateDetails(ip_address, channel) {
-        var start_cred = {
+        var details = {
             address : address,
             channel : channel
         }
 
         var url = $rootScope.url + '/macros/start'
 
-        return $http.post(url,start_cred);
+        return $http.post(url,details);
     }
 
 }
