@@ -2,10 +2,11 @@ angular.module('app').controller('IndexViewCtrl', IndexViewCtrl);
 
 IndexViewCtrl.$inject = [
     '$rootScope',
+    '$state',
     'dataService'
 ];
 
-function IndexViewCtrl($rootScope,dataService) {
+function IndexViewCtrl($rootScope,$state,dataService) {
     var vm = this;
 
     vm.channels = Array.apply(null, { length: $rootScope.numberChannels }).map(Function.call, Number);;
@@ -16,7 +17,7 @@ function IndexViewCtrl($rootScope,dataService) {
     function go(valid) {
         if (!valid) {
             alert("Invalid Details")
-        } else {
+        } else {/* 
             dataService.validateDetails(vm.ip_address,vm.channel).then(function(result){
                 if(result.status === 200){
                     
@@ -26,7 +27,10 @@ function IndexViewCtrl($rootScope,dataService) {
             }).catch(function(error){
                 console.log(error);
                 alert("Invalid Details")
-            })
+            }) */
+
+            //NOT CHECKING DETAILS DEBUGGING ONLY
+            $state.transitionTo('carControl',{channel : vm.channel, ip_address : vm.ip_address});
         }
 
     }

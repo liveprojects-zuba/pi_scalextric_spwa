@@ -27,7 +27,11 @@ function config($stateProvider, $urlRouterProvider) {
         url: '/control',
         templateUrl: 'app/shared/carControl/carControlView.html',
         controller: 'CarControlViewCtrl',
-        controllerAs: 'carControlView'
+        controllerAs: 'carControlView',
+        params: {
+            channel : null,
+            ip_address : null
+        }
     }
 
     $stateProvider.state(indexState);
