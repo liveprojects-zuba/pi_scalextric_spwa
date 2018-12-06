@@ -1,13 +1,13 @@
 angular.module('app').controller('CarControlViewCtrl', CarControlViewCtrl);
 
 CarControlViewCtrl.$inject = [
-    '$rootScope',
     '$scope',
+    '$state',
     '$stateParams',
     'dataService'
 ];
 
-function CarControlViewCtrl($rootScope,$scope,$stateParams,dataService) {
+function CarControlViewCtrl($scope,$state,$stateParams,dataService) {
     var vm = this;
 
     const DEFAULT_THROTTLE = 0;
@@ -23,6 +23,10 @@ function CarControlViewCtrl($rootScope,$scope,$stateParams,dataService) {
     activate();
 
     function activate(){
+        console.log($stateParams);
+        if($stateParams.channel === null || $stateParams.ip_address.length === null){
+            $state.transitionTo('index',{});
+        }
         channel = $stateParams.channel;
         address = $stateParams.ip_address;
     }
@@ -33,7 +37,12 @@ function CarControlViewCtrl($rootScope,$scope,$stateParams,dataService) {
 
     $scope.$watch("carControlView.throttle",function(newThrottle,oldThrottle){
         if(newThrottle != oldThrottle){
-            
+            dataService.setThrottle(ip_address,channel,newThrottle).then(function(result){
+                //vm.actualThrottle = result.throttle;
+            }).catch(function(error){
+                console.log(error);
+                vm.throttleError = true;
+            })
         }
     })
    

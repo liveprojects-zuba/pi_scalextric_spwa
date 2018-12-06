@@ -45,9 +45,9 @@ function dataService($rootScope, $http) {
         }
 
         if(!ip_address){ ip_address = $rootScope.defaultUrl; }
-
-        var url = ip_address + '/macros/setPercentage/' + channel + '/' + percentage;
-
+        
+        var url = 'http://'+ip_address + '/macros/setPercentage/' + channel + '/' + percentage;
+        console.log(url);
         return $http.post(url, throttle_details);
     }
 
