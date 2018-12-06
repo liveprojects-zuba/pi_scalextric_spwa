@@ -51,6 +51,6 @@ run.$inject = [
 
 function run($rootScope) {
     console.log('version 1.0.0');
-    $rootScope.numberChannels = 5;
-    $rootScope.url = '192.168.1.102';
+    $rootScope.defaultNumberChannels = 5;
+    $rootScope.defaultUrl = '192.168.1.102';
 }

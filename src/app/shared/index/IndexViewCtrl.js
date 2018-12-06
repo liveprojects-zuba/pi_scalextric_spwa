@@ -9,9 +9,9 @@ IndexViewCtrl.$inject = [
 function IndexViewCtrl($rootScope,$state,dataService) {
     var vm = this;
 
-    vm.channels = Array.apply(null, { length: $rootScope.numberChannels }).map(Function.call, Number);;
+    vm.channels = Array.apply(null, { length: $rootScope.defaultNumberChannels }).map(Function.call, Number);;
     vm.channel = 0;
-    vm.ip_address = $rootScope.url;
+    vm.ip_address = $rootScope.defaultUrl;
     vm.go = go;
 
     function go(valid) {
