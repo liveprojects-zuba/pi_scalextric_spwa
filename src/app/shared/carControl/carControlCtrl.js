@@ -9,7 +9,12 @@ CarControlViewCtrl.$inject = [
 function CarControlViewCtrl($rootScope,$scope,dataService) {
     var vm = this;
 
-    vm.throttle = 0;
+    const DEFAULT_THROTTLE = 0;
+
+    //throttle is the percentage the user is demanding
+    vm.throttle = DEFAULT_THROTTLE;
+    //actual throttle is the throttle the real world car is at
+    vm.actualThrottle = DEFAULT_THROTTLE;
     vm.stop = stop;
 
     function stop(){

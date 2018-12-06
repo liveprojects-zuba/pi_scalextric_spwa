@@ -1,3 +1,6 @@
-
-<input type="range" min="0" max="100" value="0" orient="vertical" class="throttle" ng-model="carControlView.throttle">
-<input type="button" value="Stop" ng-click="carControlView.stop()"></input>
+<span ng-bind="carControlView.throttle"></span>
+<div>
+    <input type="range" min="0" max="100" value="0" orient="vertical" class="throttle" ng-model="carControlView.throttle">
+    <input type="button" value="Stop" ng-click="carControlView.stop()"></input>
+</div>
+<span ng-bind="carControlView.actualThrottle"></span>
