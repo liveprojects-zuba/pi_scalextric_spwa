@@ -11,7 +11,8 @@ function dataService($rootScope, $http) {
 
     self.validateDetails = validateDetails;
     self.setThrottle = setThrottle;
-    self.getThrottle = getThrottle
+    self.getThrottle = getThrottle;
+    self.stop = stop;
 
 
     /*
@@ -33,15 +34,15 @@ function dataService($rootScope, $http) {
     /*
         Sends throttle percentage
 
-        Path : /macros/setPercentage/:channel/:percentage
+        Path : /macros/setPercent/:channel,:percentage
         Method : Post
     */
     function setThrottle(ip_address,channel, percentage) {
-        channel = 0;
+       
         
         if(!ip_address){ ip_address = $rootScope.defaultUrl; }
         
-        var url = 'http://'+ip_address + '/macros/setPercentage/' + channel + '/' + percentage;
+        var url = 'http://'+ip_address + '/macros/setPercent/' + channel + ',' + percentage;
         console.log(url);
         return $http.post(url);
     }
@@ -49,17 +50,32 @@ function dataService($rootScope, $http) {
     /*
         Gets throttle percentage
         
-        Path :/macros/getPercentage/:channel
+        Path :/macros/getPercent/:channel
         Method : Post
     */
     function getThrottle(ip_address,channel) {
 
         if(!ip_address){ ip_address = $rootScope.defaultUrl; }
 
-        var url = ip_address + '/macros/getPercentage/' + channel;
+        var url = 'http://'+ip_address + '/macros/getPercent/' + channel;
 
         return $http.get(url);
 
     }
+
+	
+    /*
+	Stops channel
+	
+	Path : /macros/stop
+	Method : Post
+     */
+	function stop(ip_address){
+		if(!ip_address){ ip_address = $rootScope.defaultUrl;}
+		
+		var url = 'http://'+ip_address + '/macros/stop';
+
+		return $http.post(url);
+	}
 
 }
