@@ -10,6 +10,8 @@ function dataService($rootScope, $http) {
 
 
     self.validateDetails = validateDetails;
+    self.setThrottle = setThrottle;
+    self.getThrottle = getThrottle
 
 
     /*
@@ -46,7 +48,7 @@ function dataService($rootScope, $http) {
 
         var url = ip_address + '/macros/setPercentage/' + channel + '/' + percentage;
 
-        return $http.post(url, details);
+        return $http.post(url, throttle_details);
     }
 
     /*
