@@ -13,7 +13,11 @@ function IndexViewCtrl($rootScope) {
     vm.go = go;
 
     function go(valid) {
-        console.log('isValid',valid);
-        console.log('conents', vm.channel, ' ', vm.ip_address);
+        if (!valid) {
+            console.log('invalid');
+        } else {
+            console.log('conents', vm.channel, ' ', vm.ip_address);
+        }
+
     }
 }
