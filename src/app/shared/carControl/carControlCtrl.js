@@ -16,6 +16,7 @@ function CarControlViewCtrl($rootScope,$scope,dataService) {
     //actual throttle is the throttle the real world car is at
     vm.actualThrottle = DEFAULT_THROTTLE;
     vm.stop = stop;
+    vm.throttleError = false;
 
     function stop(){
         console.log('car stopped');

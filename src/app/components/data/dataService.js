@@ -20,13 +20,32 @@ function dataService($rootScope, $http) {
     */
     function validateDetails(ip_address, channel) {
         var details = {
-            address : address,
-            channel : channel
+            address: address,
+            channel: channel
         }
 
         var url = $rootScope.url + '/macros/start'
 
-        return $http.post(url,details);
+        return $http.post(url, details);
     }
+
+    /*
+        Sends throttle percentage
+
+        Path : /macros/setPercentage/:channel/:percentage
+        Method : Post
+    */
+    function setThrottle(channel, percentage) {
+        var throttle_details = {
+            channel: channel,
+            percentage: percentage
+        }
+
+        var url = $rootScope.url + '/macros/setPercentage/' + channel + '/' + percentage;
+
+        return $http.post(url, details);
+    }
+
+   
 
 }
