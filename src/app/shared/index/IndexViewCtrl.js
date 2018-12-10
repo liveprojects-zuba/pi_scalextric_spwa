@@ -21,7 +21,7 @@ function IndexViewCtrl($rootScope,$state,dataService) {
             dataService.validateDetails(vm.ip_address,vm.channel).then(function(result){
                  console.log(result.status);
                 if(result.status === 200){
-                    
+                    $state.transitionTo('carControl',{channel : vm.channel, ip_address : vm.ip_address});
                 }else{
                     alert("Invalid Details")
                 }
