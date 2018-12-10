@@ -43,7 +43,6 @@ function config($stateProvider, $urlRouterProvider) {
                 }
 
                 return deferred.promise;
-
             }]
         }
     };
@@ -51,10 +50,7 @@ function config($stateProvider, $urlRouterProvider) {
     $stateProvider.state(indexState);
     $stateProvider.state(carControlState);
 
-    //$urlRouterProvider.otherwise('/index');
-
-    //FOR DEBUGGING DEFAULT CHANGED TO CAR CONTROL VIEW
-    $urlRouterProvider.otherwise('/control');
+    $urlRouterProvider.otherwise('/index');
 }
 
 angular.module('app').run(run);
