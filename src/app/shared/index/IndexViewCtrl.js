@@ -6,7 +6,7 @@ IndexViewCtrl.$inject = [
     'dataService'
 ];
 
-function IndexViewCtrl($rootScope,$state,dataService) {
+function IndexViewCtrl($rootScope, $state, dataService) {
     var vm = this;
 
     vm.channels = Array.apply(null, { length: $rootScope.defaultNumberChannels }).map(Function.call, Number);;
@@ -18,20 +18,17 @@ function IndexViewCtrl($rootScope,$state,dataService) {
         if (!valid) {
             alert("Invalid Details")
         } else {
-            dataService.validateDetails(vm.ip_address,vm.channel).then(function(result){
-                 console.log(result.status);
-                if(result.status === 200){
-                    $state.transitionTo('carControl',{channel : vm.channel, ip_address : vm.ip_address});
-                }else{
+            dataService.validateDetails(vm.ip_address, vm.channel).then(function (result) {
+                console.log(result.status);
+                if (result.status === 200) {
+                    $state.transitionTo('carControl', { channel: vm.channel, ip_address: vm.ip_address });
+                } else {
                     alert("Invalid Details")
                 }
-            }).catch(function(error){
+            }).catch(function (error) {
                 console.log(error);
                 alert("Invalid Details")
-            }) 
-
-            //NOT CHECKING DETAILS DEBUGGING ONLY
-            //$state.transitionTo('carControl',{channel : vm.channel, ip_address : vm.ip_address});
+            })
         }
 
     }
