@@ -22,9 +22,9 @@ function dataService($rootScope, $http) {
         Method : Post
     */
     function validateDetails(ip_address, channel) {
-       
 
-        if(!ip_address){ ip_address = $rootScope.defaultUrl; }
+
+        if (!ip_address) { ip_address = $rootScope.defaultUrl; }
 
         var url = 'http://' + ip_address + '/macros/start'
 
@@ -37,12 +37,12 @@ function dataService($rootScope, $http) {
         Path : /macros/setPercent/:channel,:percentage
         Method : Post
     */
-    function setThrottle(ip_address,channel, percentage) {
-       
-        
-        if(!ip_address){ ip_address = $rootScope.defaultUrl; }
-        
-        var url = 'http://'+ip_address + '/macros/setPercent/' + channel + ',' + percentage;
+    function setThrottle(ip_address, channel, percentage) {
+
+
+        if (!ip_address) { ip_address = $rootScope.defaultUrl; }
+
+        var url = 'http://' + ip_address + '/macros/setPercent/' + channel + ',' + percentage;
         console.log(url);
         return $http.post(url);
     }
@@ -53,29 +53,29 @@ function dataService($rootScope, $http) {
         Path :/macros/getPercent/:channel
         Method : Post
     */
-    function getThrottle(ip_address,channel) {
+    function getThrottle(ip_address, channel) {
 
-        if(!ip_address){ ip_address = $rootScope.defaultUrl; }
+        if (!ip_address) { ip_address = $rootScope.defaultUrl; }
 
-        var url = 'http://'+ip_address + '/macros/getPercent/' + channel;
+        var url = 'http://' + ip_address + '/macros/getPercent/' + channel;
 
         return $http.get(url);
 
     }
 
-	
-    /*
-	Stops channel
-	
-	Path : /macros/stop
-	Method : Post
-     */
-	function stop(ip_address){
-		if(!ip_address){ ip_address = $rootScope.defaultUrl;}
-		
-		var url = 'http://'+ip_address + '/macros/stop';
 
-		return $http.post(url);
-	}
+    /*
+	    Stops channel 
+	
+	    Path : /macros/stop
+	    Method : Post
+    */
+    function stop(ip_address) {
+        if (!ip_address) { ip_address = $rootScope.defaultUrl; }
+
+        var url = 'http://' + ip_address + '/macros/stop';
+
+        return $http.post(url);
+    }
 
 }
