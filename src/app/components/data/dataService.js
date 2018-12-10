@@ -21,7 +21,7 @@ function dataService($rootScope, $http) {
         Path : /macros/start
         Method : Post
     */
-    function validateDetails(ip_address, channel) {
+    function validateDetails(ip_address) {
 
 
         if (!ip_address) { ip_address = $rootScope.defaultUrl; }
