@@ -18,6 +18,7 @@ function IndexViewCtrl($rootScope, $state, dataService) {
         if (!valid) {
             alert("Invalid Details")
         } else {
+           
             dataService.validateDetails(vm.ip_address, vm.channel).then(function (result) {
                 console.log(result.status);
                 if (result.status === 200) {

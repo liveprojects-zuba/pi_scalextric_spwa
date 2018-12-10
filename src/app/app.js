@@ -29,10 +29,24 @@ function config($stateProvider, $urlRouterProvider) {
         controller: 'CarControlViewCtrl',
         controllerAs: 'carControlView',
         params: {
-            channel : null,
-            ip_address : null
+            channel: null,
+            ip_address: null
+        },
+        resolve: {
+            authenticated: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
+                var deferred = $q.defer();
+               
+                if ($stateParams.channel === null || $stateParams.ip_address.length === null) {
+                    $state.transitionTo('index', {});
+                }else{
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
+
+            }]
         }
-    }
+    };
 
     $stateProvider.state(indexState);
     $stateProvider.state(carControlState);
@@ -50,7 +64,7 @@ run.$inject = [
 ]
 
 function run($rootScope) {
-    console.log('version 1.0.0');
+    console.log('version 1.0.0 Yusof Bandar');
     $rootScope.defaultNumberChannels = 5;
     $rootScope.defaultUrl = '192.168.1.102';
 }
