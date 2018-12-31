@@ -10,28 +10,30 @@ CarControlViewCtrl.$inject = [
 
 function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) {
     var vm = this;
+
     var changed = false;
+
+    var channel = $stateParams.channel;
+    var ip_address = $stateParams.ip_address;
+
     const DEFAULT_THROTTLE = 0;
-    var channel;
-    var ip_address;
-    //throttle is the percentage the user is demanding
+
+    /* 
+     throttle : is the throttle percentage the user is demanding.
+     actualThrottle : is the throttle percentage the real world car is at.
+    */
     vm.throttle = DEFAULT_THROTTLE;
-    //actual throttle is the throttle the real world car is at
     vm.actualThrottle = DEFAULT_THROTTLE;
-    vm.stop = stop;
+
+    //Used to show error message when there is a server error.
     vm.throttleError = false;
 
-    activate();
+    vm.stop = stop;
 
-    function activate() {
-        console.log($stateParams);
-        if ($stateParams.channel === null || $stateParams.ip_address.length === null) {
-            $state.transitionTo('index', {});
-        }
-        channel = $stateParams.channel;
-        address = $stateParams.ip_address;
-    }
-
+    /*
+     Stops the car and returns user back to the index page, if there is 
+     a server error an alert is shown first.
+    */
     function stop() {
         dataService.stop(ip_address).then(function (result) {
             $state.transitionTo('index', {});
@@ -41,6 +43,11 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) 
         })
     }
 
+    /*
+     If user navigates to a different webpage stop the car.
+     When this state is navigated to the onhashchange function 
+     is called which is ignored. 
+    */
     window.onhashchange = function () {
         if (changed) {
             console.log('changed');
@@ -50,15 +57,17 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) 
         }
     }
 
+    /*
+     When users changes car throttle a change request is sent to server.
+     The server responds with the actual throttle.
+     The actual throttle is used to update the UI.  
+    */
     $scope.$watch("carControlView.throttle", function (newThrottle, oldThrottle) {
         if (newThrottle != oldThrottle) {
             dataService.setThrottle(ip_address, channel, newThrottle).then(function (result) {
-
                 result = result.data;
                 for (var i = 0; i < result.length; i++) {
-
                     if (result[i].channel === channel) {
-                        console.log('found channel');
                         vm.actualThrottle = result[i].percent;
                         break;
                     }

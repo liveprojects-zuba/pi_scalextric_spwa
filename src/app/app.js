@@ -22,6 +22,10 @@ function config($stateProvider, $urlRouterProvider) {
         controllerAs: 'indexView'
     }
 
+    /*
+     Car Control Page
+     User can control the cars throttle
+    */
     var carControlState = {
         name: 'carControl',
         url: '/control',
@@ -32,6 +36,7 @@ function config($stateProvider, $urlRouterProvider) {
             channel: null,
             ip_address: null
         },
+        //resolve used to check if transition contains channel and ipaddress params
         resolve: {
             authenticated: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
                 var deferred = $q.defer();
@@ -54,11 +59,9 @@ function config($stateProvider, $urlRouterProvider) {
 }
 
 angular.module('app').run(run);
-
 run.$inject = [
     '$rootScope'
 ]
-
 function run($rootScope) {
     console.log('version 1.0.0 Yusof Bandar');
     $rootScope.defaultNumberChannels = 5;
