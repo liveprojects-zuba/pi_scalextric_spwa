@@ -56,7 +56,7 @@ To serve a custom index.html file, the config file must be modified
 
 ```nano /etc/webiopi/config```
 
-Under the HTTP section modify to match below
+Under the HTTP section modify to match below (leave other details untouched)
 
 ```
 enabled = true
