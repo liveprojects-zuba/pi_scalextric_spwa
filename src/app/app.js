@@ -38,7 +38,7 @@ function config($stateProvider, $urlRouterProvider) {
         },
         //resolve used to check if transition contains channel and ipaddress params
         resolve: {
-            authenticated: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
+            parameters: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
                 var deferred = $q.defer();
                
                 if ($stateParams.channel === null || $stateParams.ip_address.length === null) {
