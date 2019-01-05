@@ -37,8 +37,22 @@ static domain_name_servers=192.168.0.1
 ---
 
 ### Http Server
-Once a static ip has been configured, a http server can be deployed. either using http-server or WebIOPi
+Once a static ip has been configured, a http server can be deployed. either using express, http-server or WebIOPi.
 
+Environmental Variables
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| BROKER_HOST   | Pi ip-address|
+| BROKER_CHANNELS   | Number of channels available|
+
+
+
+#### Express
+
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node server.js
+```
 
 #### http-server
 **Install nodejs and npm ```sudo apt-get install nodejs npm```**
