@@ -3,20 +3,21 @@ angular.module('app').controller('IndexViewCtrl', IndexViewCtrl);
 IndexViewCtrl.$inject = [
     '$rootScope',
     '$state',
-    'dataService'
+    'dataService',
+    'piDetails'
 ];
 
-function IndexViewCtrl($rootScope, $state, dataService) {
+function IndexViewCtrl($rootScope, $state, dataService,piDetails) {
     var vm = this;
 
     //Initialises the range of channels that can be selected and the selected channel
     vm.channels = Array.apply(null, {
-        length: $rootScope.defaultNumberChannels
+        length: piDetails.CHANNELS
     }).map(Function.call, Number);;
     vm.channel = 0;
 
     //Current ip address
-    vm.ip_address = $rootScope.defaultUrl;
+    vm.ip_address = piDetails.HOST;
 
     vm.go = go;
 

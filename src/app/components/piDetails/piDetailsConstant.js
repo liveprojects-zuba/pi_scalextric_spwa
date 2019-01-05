@@ -1,0 +1,1 @@
+angular.module('app').constant('piDetails',{"HOST":"192.168.1.102","CHANNELS":5});

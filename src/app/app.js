@@ -60,10 +60,8 @@ function config($stateProvider, $urlRouterProvider) {
 
 angular.module('app').run(run);
 run.$inject = [
-    '$rootScope'
 ]
-function run($rootScope) {
+
+function run() {
     console.log('version 1.0.0 Yusof Bandar');
-    $rootScope.defaultNumberChannels = 5;
-    $rootScope.defaultUrl = '192.168.1.102';
 }
