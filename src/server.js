@@ -36,5 +36,9 @@ app.get('/*', (req, res) => {
 const port = process.env.PORT || 8080;
 app.set('port', port);
 
+if(!process.env.ADDRESS) process.env.ADDRESS = "127.0.0.1";
+
+var ip_addresses = process.env.ADDRESS.split(",");
+
 const server = http.createServer(app);
-server.listen(port, () => console.log('running'));
+server.listen(port,ip_addresses,() => console.log('running'));
