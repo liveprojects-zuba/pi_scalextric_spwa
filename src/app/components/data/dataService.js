@@ -5,7 +5,7 @@ dataService.$inject = [
     '$http'
 ];
 
-function dataService($rootScope, $http) {
+function dataService($http) {
     var self = this;
 
 
@@ -22,6 +22,7 @@ function dataService($rootScope, $http) {
         Method : Post
     */
     function validateDetails(ip_address) {
+        if(!ip_address) throw new Error("Need to define host");
         var url = 'http://' + ip_address + '/macros/start'
         return $http.post(url);
     }
@@ -33,6 +34,9 @@ function dataService($rootScope, $http) {
         Method : Post
     */
     function setThrottle(ip_address, channel, percentage) {
+        if(!ip_address) throw new Error("Need to define host");
+        if(!channel) throw new Error("Need to define channel");
+        if(!percentage) throw new Error("Need to define percentage");
         var url = 'http://' + ip_address + '/macros/setPercent/' + channel + ',' + percentage;
         return $http.post(url);
     }
@@ -44,6 +48,8 @@ function dataService($rootScope, $http) {
         Method : Post
     */
     function getThrottle(ip_address, channel) {
+        if(!ip_address) throw new Error("Need to define host");
+        if(!channel) throw new Error("Need to define channel");
         var url = 'http://' + ip_address + '/macros/getPercent/' + channel;
         return $http.get(url);
 
@@ -57,6 +63,7 @@ function dataService($rootScope, $http) {
 	    Method : Post
     */
     function stop(ip_address) {
+        if(!ip_address) throw new Error("Need to define host");
         var url = 'http://' + ip_address + '/macros/stop';
         return $http.post(url);
     }
