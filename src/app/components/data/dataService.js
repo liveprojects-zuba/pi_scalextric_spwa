@@ -91,6 +91,8 @@ function dataService($http) {
         if(!options.hasOwnProperty('protocol')){
             options.protocol = PROTOCOL_DEFAULT;
         }
+
+        return options;
     }
 
 }
