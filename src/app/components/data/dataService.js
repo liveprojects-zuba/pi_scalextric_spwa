@@ -27,7 +27,7 @@ function dataService($http) {
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
         
-        var url = protocol + '://' + ip_address + '/macros/start'
+        var url = `${protocol}://${ip_address}/macros/start`
         return $http.post(url);
     }
 
@@ -44,7 +44,8 @@ function dataService($http) {
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
-        var url = protocol + '://' + ip_address + '/macros/setPercent/' + channel + ',' + percentage;
+        
+        var url = `${protocol}://${ip_address}/macros/setPercent/${channel},${percentage}`
         return $http.post(url);
     }
 
@@ -60,7 +61,8 @@ function dataService($http) {
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
-        var url = protocol+ '://' + ip_address + '/macros/getPercent/' + channel;
+        
+        var url = `${protocol}://${ip_address}/macros/getPercent/${channel}`
         return $http.get(url);
 
     }
@@ -78,7 +80,7 @@ function dataService($http) {
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
 
-        var url = protocol + '://' + ip_address + '/macros/stop';
+        var url = `${protocol}://${ip_address}/macros/stop`
         return $http.post(url);
     }
 
