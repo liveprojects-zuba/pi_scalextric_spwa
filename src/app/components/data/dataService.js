@@ -21,9 +21,13 @@ function dataService($http) {
         Path : /macros/start
         Method : Post
     */
-    function validateDetails(ip_address) {
+    function validateDetails(ip_address,options) {
         if(!ip_address) throw new Error("Need to define host");
-        var url = 'http://' + ip_address + '/macros/start'
+
+        var configOptions = configureOptions(options);
+        var protocol = configOptions.protocol;
+        
+        var url = protocol + '://' + ip_address + '/macros/start'
         return $http.post(url);
     }
 
@@ -37,7 +41,10 @@ function dataService($http) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
         if(!percentage) throw new Error("Need to define percentage");
-        var url = 'http://' + ip_address + '/macros/setPercent/' + channel + ',' + percentage;
+
+        var configOptions = configureOptions(options);
+        var protocol = configOptions.protocol;
+        var url = protocol + '://' + ip_address + '/macros/setPercent/' + channel + ',' + percentage;
         return $http.post(url);
     }
 
@@ -50,7 +57,10 @@ function dataService($http) {
     function getThrottle(ip_address, channel) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
-        var url = 'http://' + ip_address + '/macros/getPercent/' + channel;
+
+        var configOptions = configureOptions(options);
+        var protocol = configOptions.protocol;
+        var url = protocol+ '://' + ip_address + '/macros/getPercent/' + channel;
         return $http.get(url);
 
     }
@@ -64,8 +74,21 @@ function dataService($http) {
     */
     function stop(ip_address) {
         if(!ip_address) throw new Error("Need to define host");
-        var url = 'http://' + ip_address + '/macros/stop';
+
+        var configOptions = configureOptions(options);
+        var protocol = configOptions.protocol;
+
+        var url = protocol + '://' + ip_address + '/macros/stop';
         return $http.post(url);
+    }
+
+    //configure dataService options
+    function configureOptions(options){
+        const PROTOCOL_DEFAULT = "http"
+
+        if(!options.hasOwnProperty('protocol')){
+            options.protocol = PROTOCOL_DEFAULT;
+        }
     }
 
 }
