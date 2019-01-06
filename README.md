@@ -49,6 +49,14 @@ Environmental Variables
 
 
 #### Express
+To host SPWA using express.
+
+Environmental Variables
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| ADDRESS   | Which ip address should the server listen to delimited by a comma(OPTIONAL).|
+
 
 ```
 HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node server.js
