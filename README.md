@@ -59,7 +59,7 @@ Environmental Variables
 
 
 ```
-HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node server.js
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] ADDRESS=[IP_ADDRESSES] node server.js
 ```
 
 #### http-server
