@@ -55,6 +55,12 @@ HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node server.js
 ```
 
 #### http-server
+
+To configure Pi details 
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+```
+
 **Install nodejs and npm ```sudo apt-get install nodejs npm```**
 
 Once nodejs and npm are installed we will need the http-server package. 
@@ -77,3 +83,8 @@ enabled = true
 doc-root = PATH_TO_INDEX.HTML_FOLDER
 welcome-file = index.html
 ``` 
+
+To configure Pi details 
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+```
