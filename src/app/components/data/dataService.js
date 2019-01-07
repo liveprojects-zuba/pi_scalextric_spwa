@@ -23,7 +23,7 @@ function dataService($http) {
     */
     function validateDetails(ip_address,options) {
         if(!ip_address) throw new Error("Need to define host");
-        
+        if(!options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -42,6 +42,7 @@ function dataService($http) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
         if(!percentage) throw new Error("Need to define percentage");
+        if(!options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -59,6 +60,7 @@ function dataService($http) {
     function getThrottle(ip_address, channel,options) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
+        if(!options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -77,6 +79,7 @@ function dataService($http) {
     */
     function stop(ip_address,options) {
         if(!ip_address) throw new Error("Need to define host");
+        if(!options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
