@@ -23,6 +23,7 @@ function dataService($http) {
     */
     function validateDetails(ip_address,options) {
         if(!ip_address) throw new Error("Need to define host");
+        
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -37,7 +38,7 @@ function dataService($http) {
         Path : /macros/setPercent/:channel,:percentage
         Method : Post
     */
-    function setThrottle(ip_address, channel, percentage) {
+    function setThrottle(ip_address, channel, percentage,options) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
         if(!percentage) throw new Error("Need to define percentage");
@@ -55,7 +56,7 @@ function dataService($http) {
         Path :/macros/getPercent/:channel
         Method : Post
     */
-    function getThrottle(ip_address, channel) {
+    function getThrottle(ip_address, channel,options) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
 
@@ -74,7 +75,7 @@ function dataService($http) {
 	    Path : /macros/stop
 	    Method : Post
     */
-    function stop(ip_address) {
+    function stop(ip_address,options) {
         if(!ip_address) throw new Error("Need to define host");
 
         var configOptions = configureOptions(options);
