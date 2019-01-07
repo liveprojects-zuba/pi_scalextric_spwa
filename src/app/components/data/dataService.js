@@ -1,7 +1,6 @@
 angular.module('app').service('dataService', dataService);
 
 dataService.$inject = [
-    '$rootScope',
     '$http'
 ];
 
