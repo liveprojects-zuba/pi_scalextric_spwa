@@ -20,9 +20,9 @@ function dataService($http) {
         Path : /macros/start
         Method : Post
     */
-    function validateDetails(ip_address,options) {
+    function validateDetails(ip_address,options = {}) {
         if(!ip_address) throw new Error("Need to define host");
-        if(!options && typeof options !== "object") throw new Error("Options must be a object");
+        if(options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -37,11 +37,11 @@ function dataService($http) {
         Path : /macros/setPercent/:channel,:percentage
         Method : Post
     */
-    function setThrottle(ip_address, channel, percentage,options) {
+    function setThrottle(ip_address, channel, percentage,options = {}) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
         if(!percentage) throw new Error("Need to define percentage");
-        if(!options && typeof options !== "object") throw new Error("Options must be a object");
+        if(options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -56,10 +56,10 @@ function dataService($http) {
         Path :/macros/getPercent/:channel
         Method : Post
     */
-    function getThrottle(ip_address, channel,options) {
+    function getThrottle(ip_address, channel,options = {}) {
         if(!ip_address) throw new Error("Need to define host");
         if(!channel) throw new Error("Need to define channel");
-        if(!options && typeof options !== "object") throw new Error("Options must be a object");
+        if(options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
@@ -76,9 +76,9 @@ function dataService($http) {
 	    Path : /macros/stop
 	    Method : Post
     */
-    function stop(ip_address,options) {
+    function stop(ip_address,options = {}) {
         if(!ip_address) throw new Error("Need to define host");
-        if(!options && typeof options !== "object") throw new Error("Options must be a object");
+        if(options && typeof options !== "object") throw new Error("Options must be a object");
 
         var configOptions = configureOptions(options);
         var protocol = configOptions.protocol;
