@@ -12,7 +12,7 @@ function IndexViewCtrl($rootScope, $state,mqttService,brokerDetails) {
 
     //Initialises the range of channels that can be selected and the selected channel
     vm.channels = Array.apply(null, {
-        length: piDetails.CHANNELS
+        length: 5
     }).map(Function.call, Number);;
     vm.channel = 0;
 
