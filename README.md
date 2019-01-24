@@ -37,10 +37,38 @@ static domain_name_servers=192.168.0.1
 ---
 
 ### Http Server
-Once a static ip has been configured, a http server can be deployed. either using http-server or WebIOPi
+Once a static ip has been configured, a http server can be deployed. either using express, http-server or WebIOPi.
 
+Environmental Variables
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| BROKER_HOST   | Pi ip-address|
+| BROKER_CHANNELS   | Number of channels available|
+
+
+
+#### Express
+To host SPWA using express.
+
+Environmental Variables
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| ADDRESS   | Which ip address should the server listen to delimited by a comma(OPTIONAL).|
+
+
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] ADDRESS=[IP_ADDRESSES] node server.js
+```
 
 #### http-server
+
+To configure Pi details 
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+```
+
 **Install nodejs and npm ```sudo apt-get install nodejs npm```**
 
 Once nodejs and npm are installed we will need the http-server package. 
@@ -63,3 +91,8 @@ enabled = true
 doc-root = PATH_TO_INDEX.HTML_FOLDER
 welcome-file = index.html
 ``` 
+
+To configure Pi details 
+```
+HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+```

@@ -66,7 +66,7 @@ function config($stateProvider, $urlRouterProvider) {
         },
         //resolve used to check if transition contains channel and ipaddress params
         resolve: {
-            authenticated: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
+            parameters: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
                 var deferred = $q.defer();
                
                 if ($stateParams.channel === null) {
@@ -88,10 +88,8 @@ function config($stateProvider, $urlRouterProvider) {
 
 angular.module('app').run(run);
 run.$inject = [
-    '$rootScope'
 ]
-function run($rootScope) {
+
+function run() {
     console.log('version 1.0.0 Yusof Bandar');
-    $rootScope.defaultNumberChannels = 5;
-    $rootScope.defaultUrl = '192.168.1.102';
 }
