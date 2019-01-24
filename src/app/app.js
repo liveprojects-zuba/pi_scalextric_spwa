@@ -16,10 +16,38 @@ function config($stateProvider, $urlRouterProvider) {
     */
     var indexState = {
         name: 'index',
-        url: '/index',
+        url: '/index?uuid&brokerUrl&brokerPort&username&password',
+        params: {
+            uuid : {
+                dynamic: false
+            },
+            brokerUrl: {
+                dynamic: false
+            },
+            brokerPort: {
+                dynamic: false
+            },
+            username: {
+                dynamic : false
+            },
+            password: {
+                dynamic : false
+            }
+
+        },
         templateUrl: 'app/shared/index/indexView.html',
         controller: 'IndexViewCtrl',
-        controllerAs: 'indexView'
+        controllerAs: 'indexView',
+        resolve: {
+            broker: ['$stateParams','brokerDetails', function ($stateParams,brokerDetails) {
+                console.log($stateParams);
+                if($stateParams.uuid) brokerDetails.UUID = $stateParams.uuid;
+                if($stateParams.brokerUrl) brokerDetails.HOST = $stateParams.brokerUrl;
+                if($stateParams.brokerPort) brokerDetails.PORT = $stateParams.brokerPort;
+                if($stateParams.username) brokerDetails.USERNAME = $stateParams.username;
+                if($stateParams.password) brokerDetails.PASSWORD = $stateParams.password;
+            }]
+        }
     }
 
     /*

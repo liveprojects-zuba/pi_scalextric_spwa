@@ -6,10 +6,11 @@ CarControlViewCtrl.$inject = [
     '$stateParams',
     '$window',
     'dataService',
-    'mqttService'
+    'mqttService',
+    'brokerDetails'
 ];
 
-function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, mqttService) {
+function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, mqttService,brokerDetails) {
     var vm = this;
 
     var changed = false;
@@ -18,7 +19,7 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, 
 
     const DEFAULT_THROTTLE = 0;
 
-    var throttleTopic = `testUUID/control/0/throttle`;
+    var throttleTopic = `${brokerDetails.UUID}/control/${channel}/throttle`;
 
     //subscribe to channel throttle
     mqttService.subscribe(throttleTopic);
@@ -74,7 +75,6 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, 
     */
     $scope.$watch("carControlView.throttle", function (newThrottle, oldThrottle) {
         if (newThrottle != oldThrottle) {
-            console.log(newThrottle.toString());
             var payload = {
                 set : newThrottle
             }

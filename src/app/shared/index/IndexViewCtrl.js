@@ -4,10 +4,11 @@ IndexViewCtrl.$inject = [
     '$rootScope',
     '$state',
     'dataService',
-    'mqttService'
+    'mqttService',
+    'brokerDetails'
 ];
 
-function IndexViewCtrl($rootScope, $state, dataService,mqttService) {
+function IndexViewCtrl($rootScope, $state, dataService,mqttService,brokerDetails) {
     var vm = this;
 
     //Initialises the range of channels that can be selected and the selected channel
@@ -16,7 +17,9 @@ function IndexViewCtrl($rootScope, $state, dataService,mqttService) {
     }).map(Function.call, Number);;
     vm.channel = 0;
 
-  
+
+    console.log(brokerDetails);
+
     vm.go = go;
 
     /*
@@ -27,12 +30,12 @@ function IndexViewCtrl($rootScope, $state, dataService,mqttService) {
         if (!valid) {
             alert("Invalid Details")
         } else {
-            mqttService.initialize('broker.hivemq.com','8000');
+            mqttService.initialize(brokerDetails.HOST,brokerDetails.PORT);
             mqttService.onConnectionLost(function () {
                 console.error("connection lost");
             });
             
-            mqttService.connect(function () {
+            mqttService.connect(brokerDetails.USERNAME,brokerDetails.PASSWORD,true,function () {
                 $state.transitionTo('carControl', 
                     {
                         channel: vm.channel,
