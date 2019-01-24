@@ -3,12 +3,11 @@ angular.module('app').controller('IndexViewCtrl', IndexViewCtrl);
 IndexViewCtrl.$inject = [
     '$rootScope',
     '$state',
-    'dataService',
     'mqttService',
     'brokerDetails'
 ];
 
-function IndexViewCtrl($rootScope, $state, dataService,mqttService,brokerDetails) {
+function IndexViewCtrl($rootScope, $state,mqttService,brokerDetails) {
     var vm = this;
 
     //Initialises the range of channels that can be selected and the selected channel

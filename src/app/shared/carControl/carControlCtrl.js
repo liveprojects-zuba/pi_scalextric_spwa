@@ -4,13 +4,11 @@ CarControlViewCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    '$window',
-    'dataService',
     'mqttService',
     'brokerDetails'
 ];
 
-function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, mqttService,brokerDetails) {
+function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetails) {
     var vm = this;
 
     var changed = false;
