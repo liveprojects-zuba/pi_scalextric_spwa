@@ -9,7 +9,7 @@ CarControlViewCtrl.$inject = [
     'mqttService'
 ];
 
-function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService,mqttService) {
+function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService, mqttService) {
     var vm = this;
 
     var changed = false;
@@ -18,7 +18,7 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService,m
 
     const DEFAULT_THROTTLE = 0;
 
-    var throttleTopic = `testUUID/control/${channel}/throttle`;
+    var throttleTopic = `testUUID/control/0/throttle`;
 
     //subscribe to channel throttle
     mqttService.subscribe(throttleTopic);
@@ -58,10 +58,15 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService,m
     }
 
     mqttService.onMessageArrived(function (message) {
-        if(message.topic === throttleTopic){
-            vm.actualThrottle = message.payloadString;
+        //check the correct topic
+        if (message.topic === throttleTopic) {
+            var throttle  = JSON.parse(message.payloadString);
+
+            //filter out any set throttle messages
+            if(throttle.hasOwnProperty("throttle")){
+                vm.actualThrottle = throttle.throttle;
+            }
         }
-        
     });
 
     /*
@@ -69,7 +74,11 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService,m
     */
     $scope.$watch("carControlView.throttle", function (newThrottle, oldThrottle) {
         if (newThrottle != oldThrottle) {
-           mqttService.publish(throttleTopic,newThrottle.toString());
+            console.log(newThrottle.toString());
+            var payload = {
+                set : newThrottle
+            }
+            mqttService.publish(throttleTopic, JSON.stringify(payload));
         }
     })
 
