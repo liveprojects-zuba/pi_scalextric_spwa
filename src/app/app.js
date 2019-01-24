@@ -41,7 +41,7 @@ function config($stateProvider, $urlRouterProvider) {
             authenticated: ['$q', '$state','$stateParams', function ($q, $state,$stateParams) {
                 var deferred = $q.defer();
                
-                if ($stateParams.channel === null || $stateParams.ip_address.length === null) {
+                if ($stateParams.channel === null) {
                     $state.transitionTo('index', {});
                 }else{
                     deferred.resolve();

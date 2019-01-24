@@ -3,10 +3,11 @@ angular.module('app').controller('IndexViewCtrl', IndexViewCtrl);
 IndexViewCtrl.$inject = [
     '$rootScope',
     '$state',
-    'dataService'
+    'dataService',
+    'mqttService'
 ];
 
-function IndexViewCtrl($rootScope, $state, dataService) {
+function IndexViewCtrl($rootScope, $state, dataService,mqttService) {
     var vm = this;
 
     //Initialises the range of channels that can be selected and the selected channel
@@ -15,9 +16,7 @@ function IndexViewCtrl($rootScope, $state, dataService) {
     }).map(Function.call, Number);;
     vm.channel = 0;
 
-    //Current ip address
-    vm.ip_address = $rootScope.defaultUrl;
-
+  
     vm.go = go;
 
     /*
@@ -28,21 +27,17 @@ function IndexViewCtrl($rootScope, $state, dataService) {
         if (!valid) {
             alert("Invalid Details")
         } else {
-            dataService.validateDetails(vm.ip_address, vm.channel).then(function (result) {
-                console.log(result.status);
-                if (result.status === 200) {
-                    $state.transitionTo('carControl', 
+            mqttService.initialize('broker.hivemq.com','8000');
+            mqttService.onConnectionLost(function () {
+                console.error("connection lost");
+            });
+            
+            mqttService.connect(function () {
+                $state.transitionTo('carControl', 
                     {
                         channel: vm.channel,
-                        ip_address: vm.ip_address
                     });
-                } else {
-                    alert("Invalid Details")
-                }
-            }).catch(function (error) {
-                console.log(error);
-                alert("Invalid Details");
-            })
+            });
         }
 
     }
