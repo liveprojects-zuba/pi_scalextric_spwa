@@ -31,7 +31,7 @@ function mqttService() {
     }
 
     //connect to the mqtt broker
-    function connect(callback,username,password,ssl=false) {
+    function connect(username,password,ssl=false,callback) {
         if (!client) { throw new Error("Need to Initialize Mqtt") }
         if (callback && typeof callback !== 'function') { throw new Error("Callback must be a function")}
 
