@@ -18,6 +18,7 @@ function mqttService() {
     self.publish = publish;
     self.onConnectionLost = onConnectionLost;
     self.onMessageArrived = onMessageArrived;
+    self.disconnect = disconnect;
 
     var client = null;
 
@@ -65,6 +66,13 @@ function mqttService() {
         var mqtt_message = new Paho.MQTT.Message(message);
         mqtt_message.destinationName = topic;
         client.send(mqtt_message);
+    }
+
+    function disconnect(){
+        if(client){
+            client.disconnect();
+        }
+        
     }
 
     //called when connection is lost
