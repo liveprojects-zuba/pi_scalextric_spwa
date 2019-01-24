@@ -5,18 +5,23 @@ CarControlViewCtrl.$inject = [
     '$state',
     '$stateParams',
     '$window',
-    'dataService'
+    'dataService',
+    'mqttService'
 ];
 
-function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) {
+function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService,mqttService) {
     var vm = this;
 
     var changed = false;
 
     var channel = $stateParams.channel;
-    var ip_address = $stateParams.ip_address;
 
     const DEFAULT_THROTTLE = 0;
+
+    var throttleTopic = `testUUID/control/${channel}/throttle`;
+
+    //subscribe to channel throttle
+    mqttService.subscribe(throttleTopic);
 
     /* 
      throttle : is the throttle percentage the user is demanding.
@@ -31,16 +36,10 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) 
     vm.stop = stop;
 
     /*
-     Stops the car and returns user back to the index page, if there is 
-     a server error an alert is shown first.
+     Stops the car and returns user back to the index page,
     */
     function stop() {
-        dataService.stop(ip_address).then(function (result) {
-            $state.transitionTo('index', {});
-        }).catch(function (error) {
-            alert("Server Error");
-            $state.transitionTo('index', {});
-        })
+        $state.transitionTo('index', {});
     }
 
     /*
@@ -57,25 +56,19 @@ function CarControlViewCtrl($scope, $state, $stateParams, $window, dataService) 
         }
     }
 
+    mqttService.onMessageArrived(function (message) {
+        if(message.topic === throttleTopic){
+            vm.actualThrottle = message.payloadString;
+        }
+        
+    });
+
     /*
-     When users changes car throttle a change request is sent to server.
-     The server responds with the actual throttle.
-     The actual throttle is used to update the UI.  
+     When users changes car throttle a change request is sent to server. 
     */
     $scope.$watch("carControlView.throttle", function (newThrottle, oldThrottle) {
         if (newThrottle != oldThrottle) {
-            dataService.setThrottle(ip_address, channel, newThrottle).then(function (result) {
-                result = result.data;
-                for (var i = 0; i < result.length; i++) {
-                    if (result[i].channel === channel) {
-                        vm.actualThrottle = result[i].percent;
-                        break;
-                    }
-                }
-            }).catch(function (error) {
-                console.log(error);
-                vm.throttleError = true;
-            })
+           mqttService.publish(throttleTopic,newThrottle.toString());
         }
     })
 
