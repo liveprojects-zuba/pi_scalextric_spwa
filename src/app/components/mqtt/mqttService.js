@@ -23,7 +23,7 @@ function mqttService() {
     var client = null;
 
     // Initialize mqtt client, this must be the done before any other actions
-    function initialize(hostname, port, clientId = "clientId") {
+    function initialize(hostname, port, clientId = "") {
         if (!hostname) { throw new Error("Invalid hostname") }
         if (!port) { throw new Error("Invalid port")}
         
@@ -31,22 +31,21 @@ function mqttService() {
     }
 
     //connect to the mqtt broker
-    function connect(username,password,ssl=false,callback) {
+    function connect(callback,options = {}) {
         if (!client) { throw new Error("Need to Initialize Mqtt") }
         if (callback && typeof callback !== 'function') { throw new Error("Callback must be a function")}
 
-        var mqttOptions = {
-            onSuccess : callback,
-            onFailure : function(error){
-                console.error(error);
-            },
-            useSSL : ssl
-        }
+    
 
-        if(username) mqttOptions.userName = username;
-        if(password) mqttOptions.password = password;
-        
-        client.connect(mqttOptions);
+        options.onSuccess = function(success){
+            callback(success,undefined)
+        };
+
+        options.onFailure = function(error){
+            callback(undefined,error)
+        }
+       
+        client.connect(options);
     }
 
     //subscribe to a mqtt topic, when message arrives client.onMessageArrived is called

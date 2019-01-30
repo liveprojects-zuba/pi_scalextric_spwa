@@ -34,12 +34,22 @@ function IndexViewCtrl($rootScope, $state,mqttService,brokerDetails) {
                 console.error("connection lost");
             });
             
-            mqttService.connect(brokerDetails.USERNAME,brokerDetails.PASSWORD,true,function () {
-                $state.transitionTo('carControl', 
+        
+            mqttService.connect(function(success,error){
+                if(success){
+                    $state.transitionTo('carControl', 
                     {
                         channel: vm.channel,
                     });
-            });
+                }else if(error){
+                    console.log(error)
+                }
+                
+            },{
+                userName : brokerDetails.USERNAME,
+                password : brokerDetails.PASSWORD,
+                useSSL : true
+            })
         }
 
     }
