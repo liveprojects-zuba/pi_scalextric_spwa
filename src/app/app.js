@@ -16,7 +16,7 @@ function config($stateProvider, $urlRouterProvider) {
     */
     var indexState = {
         name: 'index',
-        url: '/index?uuid&brokerUrl&brokerPort&username&password',
+        url: '/index?uuid&host&port&username&password',
         params: {
             uuid : {
                 dynamic: false
