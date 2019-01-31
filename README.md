@@ -65,7 +65,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 | username   | Broker Username|
 | password   | Broker Password|
 
-*Example  https://aliceliveprojects.github.io/pi_scalextric_mqtt/spwa/src/index.html#!/index?brokerPort=8000&brokerUrl=broker.hivemq.com&username=batman&password=brucewayne
+*Example  https://aliceliveprojects.github.io/pi_scalextric_mqtt/spwa/src/index.html#!/index?brokerPort=8000&brokerUrl=broker.hivemq.com&username=batman&password=brucewayne*
 
 
 ## Deploying Server 
