@@ -45,7 +45,6 @@ To pass the broker details to the SPWA can be done either 2 ways
 
 *For most cases you should only use the url parameters method. Using environment variables allows for quick testing* 
 
-Broker Details
 
 | Variable      | Description  |
 | ------------- |:-------------:|
@@ -57,9 +56,9 @@ Broker Details
 
 
 
-### Deploying Server 
+## Deploying Server 
 
-#### Express
+### Express
 To host SPWA using express.
 
 ```
@@ -68,7 +67,7 @@ To host SPWA using express.
 
 ---
 
-#### http-server
+### http-server
 
 If using environment variables
 
@@ -87,7 +86,7 @@ http-server --cors
 
 ---
 
-#### WebIOPi
+### WebIOPi
 To serve a custom index.html file, the config file must be modified
 
 ```nano /etc/webiopi/config```
