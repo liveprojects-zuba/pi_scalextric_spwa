@@ -60,7 +60,7 @@ function mqttService() {
     function publish(topic,message){
         if (!client) { throw new Error("Need to Initialize Mqtt")}
         if (!topic) {throw new Error("Need to define a topic")}
-        if (!message) {throw new Error("Need to define a message")}
+        
 
         var mqtt_message = new Paho.MQTT.Message(message);
         mqtt_message.destinationName = topic;
