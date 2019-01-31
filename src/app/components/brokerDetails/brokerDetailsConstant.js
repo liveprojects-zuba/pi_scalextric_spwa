@@ -1,2 +1,1 @@
-
-angular.module('app').value('brokerDetails',{"UUID":"","HOST":"","PORT":"","PASSWORD":"","USERNAME":""});
+angular.module('app').value('brokerDetails',{"UUID":"testUUID","HOST":"m15.cloudmqtt.com","PORT":"36876","USERNAME":"mtjfequg","PASSWORD":"hC_j7V_hfAKE"});
