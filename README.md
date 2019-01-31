@@ -43,7 +43,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 - Via the url parameters
 - Via environment variables
 
-*For most cases you should only use the url parameters method. Using environment variables allows for quick development* 
+*For most cases you should only use the url parameters method. Using environment variables allows for quick testing* 
 
 Broker Details
 
@@ -66,6 +66,8 @@ To host SPWA using express.
  node server.js
 ```
 
+---
+
 #### http-server
 
 If using environment variables
@@ -82,6 +84,8 @@ http-server --cors
 
 
 *To run on https read https://digitallabs.mmu.ac.uk/taming-the-urban-wild/#more-1657*
+
+---
 
 #### WebIOPi
 To serve a custom index.html file, the config file must be modified
