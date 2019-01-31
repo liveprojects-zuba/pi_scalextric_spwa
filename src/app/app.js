@@ -16,12 +16,12 @@ function config($stateProvider, $urlRouterProvider) {
     */
     var indexState = {
         name: 'index',
-        url: '/index?uuid&host&port&username&password',
+        url: '/index?uuid&brokerHost&brokerPort&username&password',
         params: {
             uuid : {
                 dynamic: false
             },
-            brokerUrl: {
+            brokerHost: {
                 dynamic: false
             },
             brokerPort: {
@@ -42,7 +42,7 @@ function config($stateProvider, $urlRouterProvider) {
             broker: ['$stateParams','brokerDetails', function ($stateParams,brokerDetails) {
                 console.log($stateParams);
                 if($stateParams.uuid) brokerDetails.UUID = $stateParams.uuid;
-                if($stateParams.brokerUrl) brokerDetails.HOST = $stateParams.brokerUrl;
+                if($stateParams.brokerHost) brokerDetails.HOST = $stateParams.brokerHost;
                 if($stateParams.brokerPort) brokerDetails.PORT = $stateParams.brokerPort;
                 if($stateParams.username) brokerDetails.USERNAME = $stateParams.username;
                 if($stateParams.password) brokerDetails.PASSWORD = $stateParams.password;
