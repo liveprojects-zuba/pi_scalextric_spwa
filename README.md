@@ -83,3 +83,8 @@ If using environment variables
 ```
 node writePiConfig.js
 ```
+
+
+---
+
+This is the work of [Yusof Bandar](https://github.com/YusofBandar).
