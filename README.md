@@ -1,10 +1,10 @@
 # pi_scalextric_spwa
 Single Page Web Application (SPWA) to control the pi scalextric
 
-## Setting Http Server
+# Setting Http Server
 Setting up Raspberry Pi to serve a SPWA
 
-### Static IP
+## Static IP
 
 *Setting a static ip will disconnect the Pi from the interent please read the Http Server section and install the needed modules*
 
@@ -36,46 +36,50 @@ static domain_name_servers=192.168.0.1
 
 ---
 
-### Http Server
-Once a static ip has been configured, a http server can be deployed. either using express, http-server or WebIOPi.
+# Deployment
 
-Environmental Variables
+To pass the broker details to the SPWA can be done either 2 ways
+
+- Via the url parameters
+- Via environment variables
+
+*For most cases you should only use the url parameters method. Using environment variables allows for quick development* 
+
+Broker Details
 
 | Variable      | Description  |
 | ------------- |:-------------:|
-| BROKER_HOST   | Pi ip-address|
-| BROKER_CHANNELS   | Number of channels available|
+| UUID   | Pi id|      
+| BROKERHOST   | Broker Host|
+| BROKERPORT   | Broker Port|
+| USERNAME   | Broker Username|
+| PASSWORD   | Broker Password|
 
 
+
+### Deploying Server 
 
 #### Express
 To host SPWA using express.
 
-Environmental Variables
-
-| Variable      | Description  |
-| ------------- |:-------------:|
-| ADDRESS   | Which ip address should the server listen to delimited by a comma(OPTIONAL).|
-
-
 ```
-HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] ADDRESS=[IP_ADDRESSES] node server.js
+ node server.js
 ```
 
 #### http-server
 
-To configure Pi details 
+If using environment variables
+
 ```
-HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+node writePiConfig.js
 ```
 
-**Install nodejs and npm ```sudo apt-get install nodejs npm```**
 
-Once nodejs and npm are installed we will need the http-server package. 
+```
+sudo npm install http-server -g
+http-server --cors
+```
 
-**Install http-server ```sudo npm install http-server -g```**
-
-Start the server ```http-server --cors```
 
 *To run on https read https://digitallabs.mmu.ac.uk/taming-the-urban-wild/#more-1657*
 
@@ -92,7 +96,8 @@ doc-root = PATH_TO_INDEX.HTML_FOLDER
 welcome-file = index.html
 ``` 
 
-To configure Pi details 
+If using environment variables
+
 ```
-HOST=[IP_ADDRESS] CHANNELS=[CHANNELS] node writePiConfig.js
+node writePiConfig.js
 ```
