@@ -45,6 +45,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 
 *For most cases you should only use the url parameters method. Using environment variables allows for quick testing* 
 
+#### Enironment Variables
 
 | Variable      | Description  |
 | ------------- |:-------------:|
@@ -54,6 +55,17 @@ To pass the broker details to the SPWA can be done either 2 ways
 | USERNAME   | Broker Username|
 | PASSWORD   | Broker Password|
 
+#### Url Parameters
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| uuid   | Pi id|      
+| brokerHost   | Broker Host|
+| brokerPort   | Broker Port|
+| username   | Broker Username|
+| password   | Broker Password|
+
+*Example  https://aliceliveprojects.github.io/pi_scalextric_mqtt/spwa/src/index.html#!/index?brokerPort=8000&brokerUrl=broker.hivemq.com&username=batman&password=brucewayne
 
 
 ## Deploying Server 
