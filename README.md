@@ -1,41 +1,6 @@
 # pi_scalextric_spwa
 Single Page Web Application (SPWA) to control the pi scalextric
 
-# Setting Http Server
-Setting up Raspberry Pi to serve a SPWA
-
-## Static IP
-
-*Setting a static ip will disconnect the Pi from the interent please read the Http Server section and install the needed modules*
-
-Once the Pi is connected to the router, a static ip needs to be configured. 
-
-**The Pi ip address should be : ```192.168.1.3```**
-
-**The Pi routers address should be : ```192.168.1.1```**
-
-To configure a static ip either follow the intructions below or from [Raspberry Pi Org](https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/) or [Raspberry Pi Org Archived](http://web.archive.org/web/20181213192602/https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/)
-
-Open a terminal and type ```sudo nano /etc/dhcpcd.conf``` and append this to the bottom of the script
-
-```
-interface eth0
-
-static ip_address=192.168.1.3/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.0.1
-
-interface wlan0
-
-static ip_address=192.168.1.3/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.0.1
-```
-
-*If another ip address is being used, the default ip address needs to be changed within the SPWA located in app.js*
-
----
-
 # Deployment
 
 To pass the broker details to the SPWA can be done either 2 ways
@@ -66,6 +31,8 @@ To pass the broker details to the SPWA can be done either 2 ways
 | password   | Broker Password|
 
 *Example  https://aliceliveprojects.github.io/pi_scalextric_mqtt/spwa/src/index.html#!/index?brokerPort=8000&brokerUrl=broker.hivemq.com&username=batman&password=brucewayne*
+
+*To generate the QR code, to deploy the spwa, see [QrCode](https://github.com/aliceliveprojects/pi_scalextric_mqtt/tree/master/mqtt/src/QrCode)*
 
 
 ## Deploying Server 
