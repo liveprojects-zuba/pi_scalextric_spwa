@@ -12,12 +12,14 @@ var getClientConfig = function () {
   if(!process.env.BROKERPORT) process.env.BROKERPORT = '';
   if(!process.env.USERNAME) process.env.USERNAME = '';
   if(!process.env.PASSWORD) process.env.PASSWORD = '';
+  if(!process.env.SSL) process.env.SSL = '';
 
   result.UUID = process.env.UUID;
   result.HOST = process.env.BROKERHOST;
   result.PORT = process.env.BROKERPORT;
   result.USERNAME = process.env.USERNAME;
   result.PASSWORD = process.env.PASSWORD;
+  result.SSL = process.env.SSL;
   
   return result;
 }

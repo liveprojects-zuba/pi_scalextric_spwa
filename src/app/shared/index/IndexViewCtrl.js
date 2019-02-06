@@ -7,7 +7,7 @@ IndexViewCtrl.$inject = [
     'brokerDetails'
 ];
 
-function IndexViewCtrl($rootScope, $state,mqttService,brokerDetails) {
+function IndexViewCtrl($rootScope, $state, mqttService, brokerDetails) {
     var vm = this;
 
     //Initialises the range of channels that can be selected and the selected channel
@@ -29,27 +29,35 @@ function IndexViewCtrl($rootScope, $state,mqttService,brokerDetails) {
         if (!valid) {
             alert("Invalid Details")
         } else {
-            mqttService.initialize(brokerDetails.HOST,brokerDetails.PORT);
+            mqttService.initialize(brokerDetails.HOST, brokerDetails.PORT);
             mqttService.onConnectionLost(function () {
                 console.error("connection lost");
             });
+
+
+            var mqttOptions = {};
+
+            if (brokerDetails.SSL) { mqttOptions.useSSL = brokerDetails.SSL; }
+            if (brokerDetails.USERNAME) {
+                mqttOptions.userName = brokerDetails.USERNAME;
+                if(brokerDetails.PASSWORD){
+                    mqttOptions.password = brokerDetails.PASSWORD;
+                }
+            }
+
             
-        
-            mqttService.connect(function(success,error){
-                if(success){
-                    $state.transitionTo('carControl', 
-                    {
-                        channel: vm.channel,
-                    });
-                }else if(error){
+
+            mqttService.connect(function (success, error) {
+                if (success) {
+                    $state.transitionTo('carControl',
+                        {
+                            channel: vm.channel,
+                        });
+                } else if (error) {
                     console.log(error)
                 }
-                
-            },{
-                userName : brokerDetails.USERNAME,
-                password : brokerDetails.PASSWORD,
-                useSSL : true
-            })
+
+            },mqttOptions)
         }
 
     }

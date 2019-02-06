@@ -15,6 +15,7 @@ var getClientConfig = function () {
   result.PORT = process.env.BROKERPORT;
   result.USERNAME = process.env.USERNAME;
   result.PASSWORD = process.env.PASSWORD;
+  result.SSL = process.env.SSL;
   
   return result;
 }

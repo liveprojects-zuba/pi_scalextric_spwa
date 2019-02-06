@@ -16,7 +16,7 @@ function config($stateProvider, $urlRouterProvider) {
     */
     var indexState = {
         name: 'index',
-        url: '/index?uuid&brokerHost&brokerPort&username&password',
+        url: '/index?uuid&brokerHost&brokerPort&username&password&ssl',
         params: {
             uuid : {
                 dynamic: false
@@ -32,6 +32,9 @@ function config($stateProvider, $urlRouterProvider) {
             },
             password: {
                 dynamic : false
+            },
+            ssl:{
+                dynamic : false
             }
 
         },
@@ -46,6 +49,7 @@ function config($stateProvider, $urlRouterProvider) {
                 if($stateParams.brokerPort) brokerDetails.PORT = $stateParams.brokerPort;
                 if($stateParams.username) brokerDetails.USERNAME = $stateParams.username;
                 if($stateParams.password) brokerDetails.PASSWORD = $stateParams.password;
+                if($stateParams.ssl) brokerDetails.SSL = $stateParams.ssl;
             }]
         }
     }
