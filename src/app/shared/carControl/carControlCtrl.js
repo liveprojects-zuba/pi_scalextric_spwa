@@ -8,7 +8,7 @@ CarControlViewCtrl.$inject = [
     'brokerDetails'
 ];
 
-function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetails) {
+function CarControlViewCtrl($scope, $state, $stateParams, mqttService, brokerDetails) {
     var vm = this;
 
     var changed = false;
@@ -18,9 +18,13 @@ function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetai
     const DEFAULT_THROTTLE = 0;
 
     var throttleTopic = `${brokerDetails.UUID}/control/${channel}/throttle`;
+    var getResourcesTopic = `${brokerDetails.UUID}/resources`;
 
     //subscribe to channel throttle
     mqttService.subscribe(throttleTopic);
+
+    // subscribe to channel resources
+    mqttService.subscribe(getResourcesTopic);
 
     /* 
      throttle : is the throttle percentage the user is demanding.
@@ -28,6 +32,7 @@ function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetai
     */
     vm.throttle = DEFAULT_THROTTLE;
     vm.actualThrottle = DEFAULT_THROTTLE;
+    vm.resources;
 
     //Used to show error message when there is a server error.
     vm.throttleError = false;
@@ -40,6 +45,36 @@ function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetai
     function stop() {
         mqttService.disconnect();
         $state.transitionTo('index', {});
+    }
+
+    /*
+        Special weapons messages that could be received :
+
+        {
+            state: "busy"
+        }
+
+        or
+
+        {
+            state: "ready"
+        }
+
+        Special weapons payload format for firing :
+
+        {
+            state: "requested",
+            target: [CHANNEL_ID]
+        }
+
+    */
+
+    function fireSpecialWeapon(resourceId) {
+        let payload = {
+            state: "requested",
+            target: 1
+        };
+        mqttService.publish(`${brokerDetails.UUID}/control/0/${resourceId}/state`, JSON.stringify(payload));
     }
 
     /*
@@ -57,6 +92,9 @@ function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetai
     }
 
     mqttService.onMessageArrived(function (message) {
+
+        console.log(message);
+
         //check the correct topic
         if (message.topic === throttleTopic) {
             var throttle  = JSON.parse(message.payloadString);
@@ -65,6 +103,10 @@ function CarControlViewCtrl($scope, $state, $stateParams,mqttService,brokerDetai
             if(throttle.hasOwnProperty("throttle")){
                 vm.actualThrottle = throttle.throttle;
             }
+        } else if (message.topic === getResourcesTopic) {
+            console.log(message);
+            vm.resources = JSON.parse(message.payloadString);
+            console.log(vm.resources);
         }
     });
 
