@@ -31,7 +31,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 | password   | Broker Password|
 
 
-*Example https://aliceliveprojects.github.io/pi_scalextric_spwa/src/index.html#!/index?brokerPort=8000&brokerUrl=broker.hivemq.com*
+*Example https://aliceliveprojects.github.io/pi_scalextric_spwa/src/index.html#!/index?brokerPort=8000&brokerHost=broker.hivemq.com*
 
 
 *To generate the QR code, to deploy the spwa, see [QrCode](https://github.com/aliceliveprojects/pi_scalextric_mqtt/tree/master/mqtt/src/QrCode)*
