@@ -1,41 +1,6 @@
 # pi_scalextric_spwa
 Single Page Web Application (SPWA) to control the pi scalextric
 
-# Setting Http Server
-Setting up Raspberry Pi to serve a SPWA
-
-## Static IP
-
-*Setting a static ip will disconnect the Pi from the interent please read the Http Server section and install the needed modules*
-
-Once the Pi is connected to the router, a static ip needs to be configured. 
-
-**The Pi ip address should be : ```192.168.1.3```**
-
-**The Pi routers address should be : ```192.168.1.1```**
-
-To configure a static ip either follow the intructions below or from [Raspberry Pi Org](https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/) or [Raspberry Pi Org Archived](http://web.archive.org/web/20181213192602/https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/)
-
-Open a terminal and type ```sudo nano /etc/dhcpcd.conf``` and append this to the bottom of the script
-
-```
-interface eth0
-
-static ip_address=192.168.1.3/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.0.1
-
-interface wlan0
-
-static ip_address=192.168.1.3/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.0.1
-```
-
-*If another ip address is being used, the default ip address needs to be changed within the SPWA located in app.js*
-
----
-
 # Deployment
 
 To pass the broker details to the SPWA can be done either 2 ways
@@ -45,6 +10,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 
 *For most cases you should only use the url parameters method. Using environment variables allows for quick testing* 
 
+#### Enironment Variables
 
 | Variable      | Description  |
 | ------------- |:-------------:|
@@ -54,6 +20,21 @@ To pass the broker details to the SPWA can be done either 2 ways
 | USERNAME   | Broker Username|
 | PASSWORD   | Broker Password|
 
+#### Url Parameters
+
+| Variable      | Description  |
+| ------------- |:-------------:|
+| uuid   | Pi id|      
+| brokerHost   | Broker Host|
+| brokerPort   | Broker Port|
+| username   | Broker Username|
+| password   | Broker Password|
+
+
+*Example https://aliceliveprojects.github.io/pi_scalextric_spwa/src/index.html#!/index?brokerPort=8000&brokerHost=broker.hivemq.com*
+
+
+*To generate the QR code, to deploy the spwa, see [QrCode](https://github.com/aliceliveprojects/pi_scalextric_mqtt/tree/master/mqtt/src/QrCode)*
 
 
 ## Deploying Server 
@@ -104,3 +85,19 @@ If using environment variables
 ```
 node writePiConfig.js
 ```
+
+
+---
+
+
+This is the work of [Yusof Bandar](https://github.com/YusofBandar) for [DigitalLabs@MMU](https://digitallabs.mmu.ac.uk/).
+
+<p align="center">
+<img align="middle" src="https://trello-attachments.s3.amazonaws.com/5b2caa657bcf194b4d089d48/5b98c7ec64145155e09b5083/d2e189709d3b79aa1222ef6e9b1f3735/DigitalLabsLogo_512x512.png"  />
+ </p>
+ 
+ 
+<p align="center">
+<img align="middle" src="https://trello-attachments.s3.amazonaws.com/5b2caa657bcf194b4d089d48/5b98c7ec64145155e09b5083/e5f47675f420face27488d4e5330a48c/logo_mmu.png" />
+ </p>
+
