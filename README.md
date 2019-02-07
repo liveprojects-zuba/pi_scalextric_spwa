@@ -47,7 +47,7 @@ To pass the broker details to the SPWA can be done either 2 ways
 To host SPWA using express.
 
 ```
- node server.js
+ [ENV_VAR]:[VALUE] node server.js
 ```
 
 ---
@@ -57,7 +57,7 @@ To host SPWA using express.
 If using environment variables
 
 ```
-node writePiConfig.js
+[ENV_VAR]:[VALUE] node writePiConfig.js
 ```
 
 
