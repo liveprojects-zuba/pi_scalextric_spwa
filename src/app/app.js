@@ -49,7 +49,7 @@ function config($stateProvider, $urlRouterProvider) {
                 if($stateParams.brokerPort) brokerDetails.PORT = $stateParams.brokerPort;
                 if($stateParams.username) brokerDetails.USERNAME = $stateParams.username;
                 if($stateParams.password) brokerDetails.PASSWORD = $stateParams.password;
-                if($stateParams.ssl) brokerDetails.SSL = $stateParams.ssl;
+                if($stateParams.ssl) brokerDetails.SSL = ($stateParams.ssl.toLowerCase() == 'true');
             }]
         }
     }
