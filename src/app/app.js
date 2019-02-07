@@ -43,7 +43,7 @@ function config($stateProvider, $urlRouterProvider) {
         controllerAs: 'indexView',
         resolve: {
             broker: ['$stateParams','brokerDetails', function ($stateParams,brokerDetails) {
-                console.log($stateParams);
+            
                 if($stateParams.uuid) brokerDetails.UUID = $stateParams.uuid;
                 if($stateParams.brokerHost) brokerDetails.HOST = $stateParams.brokerHost;
                 if($stateParams.brokerPort) brokerDetails.PORT = $stateParams.brokerPort;
