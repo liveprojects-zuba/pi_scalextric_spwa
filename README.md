@@ -14,7 +14,8 @@ To pass the broker details to the SPWA can be done either 2 ways
 
 | Variable      | Description  |
 | ------------- |:-------------:|
-| UUID   | Pi id|      
+| UUID   | Pi id|
+| SSL    | True to use ssl|
 | BROKERHOST   | Broker Host|
 | BROKERPORT   | Broker Port|
 | USERNAME   | Broker Username|
@@ -24,14 +25,15 @@ To pass the broker details to the SPWA can be done either 2 ways
 
 | Variable      | Description  |
 | ------------- |:-------------:|
-| uuid   | Pi id|      
+| uuid   | Pi id|
+| SSL    | True to use ssl|
 | brokerHost   | Broker Host|
 | brokerPort   | Broker Port|
 | username   | Broker Username|
 | password   | Broker Password|
 
 
-*Example https://aliceliveprojects.github.io/pi_scalextric_spwa/src/index.html#!/index?brokerPort=8000&brokerHost=broker.hivemq.com&uuid=testUUID*
+*Example https://aliceliveprojects.github.io/pi_scalextric_spwa/src/index.html#!/index?brokerPort=443&brokerHost=iot.eclipse.org&uuid=testUUID&ssl=true*
 
 <img src="https://github.com/aliceliveprojects/pi_scalextric_spwa/blob/master/docs/QrCode.png" width="200">
 
