@@ -55,6 +55,7 @@ function IndexViewCtrl($rootScope, $state, mqttService, brokerDetails) {
                         });
                 } else if (error) {
                     console.log(error)
+                    alert(`Could Not Connect to ${brokerDetails.HOST}:${brokerDetails.PORT}`)
                 }
 
             },mqttOptions)
