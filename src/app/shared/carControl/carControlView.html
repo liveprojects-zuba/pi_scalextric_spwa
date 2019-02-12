@@ -6,3 +6,4 @@
 </div>
 <span ng-bind="carControlView.actualThrottle"></span>
 <button ng-repeat="resource in carControlView.resources track by $index" ng-model="carControlView.resources[$index]" ng-click="carControlView.fireSpecialWeapon(resource.id)">{{resource.name}}</button>
+<select ng-model="carControlView.targetChannel" ng-options="c for c in carControlView.targetChannels" required></select>

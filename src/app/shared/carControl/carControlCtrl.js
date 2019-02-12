@@ -17,27 +17,42 @@ function CarControlViewCtrl($scope, $state, $stateParams, mqttService, brokerDet
 
     const DEFAULT_THROTTLE = 0;
 
+    /*
+     throttle : is the throttle percentage the user is demanding.
+     actualThrottle : is the throttle percentage the real world car is at.
+     resources : is the array holding the available special weapons
+    */
+    vm.throttle = DEFAULT_THROTTLE;
+    vm.actualThrottle = DEFAULT_THROTTLE;
+    vm.resources = [];
+
+    vm.targetChannels = Array.apply(null, {
+        length: 3
+    }).map(Function.call, Number);;
+
+    vm.targetChannels = vm.targetChannels.filter(targetChannel => targetChannel !== channel );
+    console.log(vm.targetChannels);
+
+    vm.targetChannel = -1;
+
+    //Used to show error message when there is a server error.
+    vm.throttleError = false;
+
+    vm.stop = stop;
+    vm.fireSpecialWeapon = fireSpecialWeapon;
+
+
+
+
     var throttleTopic = `${brokerDetails.UUID}/control/${channel}/throttle`;
     var getResourcesTopic = `${brokerDetails.UUID}/resources`;
+    var resourceStateTopic = `${brokerDetails.UUID}/control/{channel}/{resourceId}/state`;
 
     //subscribe to channel throttle
     mqttService.subscribe(throttleTopic);
 
     // subscribe to channel resources
     mqttService.subscribe(getResourcesTopic);
-
-    /* 
-     throttle : is the throttle percentage the user is demanding.
-     actualThrottle : is the throttle percentage the real world car is at.
-    */
-    vm.throttle = DEFAULT_THROTTLE;
-    vm.actualThrottle = DEFAULT_THROTTLE;
-    vm.resources;
-
-    //Used to show error message when there is a server error.
-    vm.throttleError = false;
-
-    vm.stop = stop;
 
     /*
      Stops the car and returns user back to the index page,
@@ -49,32 +64,19 @@ function CarControlViewCtrl($scope, $state, $stateParams, mqttService, brokerDet
 
     /*
         Special weapons messages that could be received :
-
-        {
-            state: "busy"
-        }
-
-        or
-
-        {
-            state: "ready"
-        }
+        { state: "busy" } or { state: "ready" }
 
         Special weapons payload format for firing :
-
-        {
-            state: "requested",
-            target: [CHANNEL_ID]
-        }
+        { state: "requested", target: [CHANNEL_ID] }
 
     */
 
     function fireSpecialWeapon(resourceId) {
         let payload = {
             state: "requested",
-            target: 1
+            target: vm.targetChannel
         };
-        mqttService.publish(`${brokerDetails.UUID}/control/0/${resourceId}/state`, JSON.stringify(payload));
+        mqttService.publish(resourceStateTopic.replace(/\{resourceId\}/, resourceId).replace(/\{channel\}/, channel), JSON.stringify(payload));
     }
 
     /*
@@ -104,10 +106,22 @@ function CarControlViewCtrl($scope, $state, $stateParams, mqttService, brokerDet
                 vm.actualThrottle = throttle.throttle;
             }
         } else if (message.topic === getResourcesTopic) {
-            console.log(message);
             vm.resources = JSON.parse(message.payloadString);
-            console.log(vm.resources);
+            vm.resources.forEach(resource => {
+                // subscribe to resource state for this channel
+                mqttService.subscribe(resourceStateTopic.replace(/\{resourceId\}/, resource.id));
+            });
+            $scope.$apply();
         }
+
+        if (vm.resources !== undefined) {
+            vm.resources.forEach(resource => {
+                if (message.topic === resourceStateTopic.replace(/\{resourceId\}/, resource.id)) {
+                    console.log(message);
+                }
+            })
+        }
+
     });
 
     /*
