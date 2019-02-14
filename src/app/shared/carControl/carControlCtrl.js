@@ -58,6 +58,12 @@ function CarControlViewCtrl($scope, $state, $stateParams, mqttService, brokerDet
      Stops the car and returns user back to the index page,
     */
     function stop() {
+        //stop the car
+        var payload = {
+            set : 0
+        }
+        mqttService.publish(throttleTopic, JSON.stringify(payload));
+        
         mqttService.disconnect();
         $state.transitionTo('index', {});
     }
